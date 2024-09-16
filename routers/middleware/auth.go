@@ -93,8 +93,7 @@ func SignatureMiddleware(paramName ...string) gin.HandlerFunc {
 				return
 			}
 
-			encodedParam := base64.StdEncoding.EncodeToString([]byte(paramValue))
-			hashedParam := sha512.Sum512([]byte(encodedParam))
+			hashedParam := sha512.Sum512([]byte(paramValue))
 			hashedStr = base64.StdEncoding.EncodeToString(hashedParam[:])
 		} else {
 			// Extract the body
@@ -108,8 +107,7 @@ func SignatureMiddleware(paramName ...string) gin.HandlerFunc {
 			// Replace the body so it can be read again later
 			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 
-			encodedBody := base64.StdEncoding.EncodeToString(body)
-			hashedBody := sha512.Sum512([]byte(encodedBody))
+			hashedBody := sha512.Sum512([]byte(body))
 			hashedStr = base64.StdEncoding.EncodeToString(hashedBody[:])
 		}
 
