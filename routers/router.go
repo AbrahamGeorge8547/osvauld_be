@@ -9,6 +9,7 @@ import (
 
 func SetupRoute() *gin.Engine {
 
+	viper.SetDefault("DEBUG", false)
 	environment := viper.GetBool("DEBUG")
 	if environment {
 		gin.SetMode(gin.DebugMode)

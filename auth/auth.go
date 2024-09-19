@@ -41,8 +41,7 @@ func GenerateToken(username string, id uuid.UUID) (string, error) {
 }
 
 func VerifySignature(armoredSignature string, armoredPublicKey string, challenge string) (bool, error) {
-	decodedBytes, _ := base64.StdEncoding.DecodeString(armoredPublicKey)
-	key, err := crypto.NewKeyFromArmored(string(decodedBytes))
+	key, err := crypto.NewKeyFromArmored(armoredPublicKey)
 	if err != nil {
 		logger.Debugf("Error: reading key %v", err)
 		return false, err
