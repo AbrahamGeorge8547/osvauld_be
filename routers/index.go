@@ -31,7 +31,7 @@ func RegisterRoutes(route *gin.Engine) {
 	route.POST("/user/verify", controllers.VerifyChallenge)
 	route.GET("/users/signed-up", middleware.JWTAuthMiddleware(), controllers.GetAllSignedUpUsers)
 	route.GET("/users/all", middleware.JWTAuthMiddleware(), controllers.GetAllUsers)
-	route.POST("/folder/", middleware.JWTAuthMiddleware(), controllers.CreateFolder)
+	route.POST("/folder", middleware.JWTAuthMiddleware(), controllers.CreateFolder)
 	route.GET("/folder/:id/credential", middleware.JWTAuthMiddleware(), controllers.GetCredentialsByFolder)
 	route.GET("/folders", middleware.JWTAuthMiddleware(), controllers.FetchAccessibleFoldersForUser)
 
@@ -41,7 +41,7 @@ func RegisterRoutes(route *gin.Engine) {
 	route.POST("share-folder/users", middleware.JWTAuthMiddleware(), middleware.SignatureMiddleware(), controllers.ShareFolderWithUsers)
 	route.POST("share-folder/groups", middleware.JWTAuthMiddleware(), middleware.SignatureMiddleware(), controllers.ShareFolderWithGroups)
 
-	route.POST("/credential/", middleware.JWTAuthMiddleware(), middleware.SignatureMiddleware(), controllers.AddCredential)
+	route.POST("/credential", middleware.JWTAuthMiddleware(), middleware.SignatureMiddleware(), controllers.AddCredential)
 	route.GET("/credential/:id", middleware.JWTAuthMiddleware(), controllers.GetCredentialDataByID)
 	route.PUT("/credential/:id", middleware.JWTAuthMiddleware(), middleware.SignatureMiddleware(), controllers.EditCredential)
 	route.PUT("/credential/:id/details", middleware.JWTAuthMiddleware(), middleware.SignatureMiddleware(), controllers.EditCredentialDetails)
